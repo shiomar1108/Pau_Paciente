@@ -1,0 +1,46 @@
+from pandas import DataFrame, read_csv, read_excel
+import pandas as pd
+import re
+import math
+#file1 to be opened for reading
+file1 = '2021_WS_ PROXI_R2.xlsx'
+file2 = '2021_WL_ PROXI_R2.xlsx'
+
+# Read excel <file1>
+df = pd.read_excel(file1, sheet_name="Format",skiprows=1)
+# Read excel <file2>
+df2 = pd.read_excel(file2, sheet_name="Format",skiprows=1)
+
+Parameter = df['Parameter']
+StartByte = df['Start Byte']
+StopByte =  df['Stop Byte']
+StartBit = df['Start Bit']
+StopBit = df['Stop Bit']
+Signal = df['Signal']
+
+Parameter2 = df2['Parameter']
+StartByte2 = df2['Start Byte']
+StopByte2 =  df2['Stop Byte']
+StartBit2 = df2['Start Bit']
+StopBit2 = df2['Stop Bit']
+Signal2 = df2['Signal']
+
+f = open("proxi_param_table.c", "w")
+
+i = 0
+k = 0
+SignalLen = len(Signal)
+finalLen = SignalLen
+for i in range(0, SignalLen):
+    if (Signal[i] == "Not Used"):
+        finalLen = finalLen-1
+cols = 2
+
+i2 = 0
+k2 = 0
+SignalLen2 = len(Signal2)
+finalLen2 = SignalLen2
+for i2 in range(0, SignalLen2):
+    if (Signal2[i2] == "Not Used"):
+        finalLen2 = finalLen2-1
+cols2 = 2
