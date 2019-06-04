@@ -10,7 +10,7 @@ def add_new_data(file):
     data.append(temp)
     for i in range(1,19):
         text = "Diga " + header[i] + " :  "
-        data.append(raw_input(text))
+        data.append(input(text))
 
     rb = xlrd.open_workbook(file)
     r_sheet = rb.sheet_by_index(0) 
