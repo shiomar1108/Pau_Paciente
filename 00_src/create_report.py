@@ -29,6 +29,9 @@ def create_report(file):
     #Get patients Name
     paciente = file[10:-5].replace("_"," ").title()
 
+    #Get Pdf file
+    pdf_path = "./02_Reports/" + file[10:-5] +".pdf"
+
     #create PDF
     pdf = FPDF()
     pdf.add_page()
@@ -52,4 +55,4 @@ def create_report(file):
             else:
                 pdf.cell(10, 10, '%s' % (df[header[j]].ix[i]), 1, 1, 'C')
     pdf.image('./00_src/report.png', x=30, y=170, w=170, h=120, type='', link='https://www.facebook.com/pauwattynutri/')
-    pdf.output('./02_Reports/test.pdf', 'F')
+    pdf.output(pdf_path, 'F')

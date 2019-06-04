@@ -8,7 +8,7 @@ file = "./01_Data/shiomar_salazar.xlsx"
 
 def main():
     add_new_data(file)
-    #create_report(file)
+    create_report(file)
 
 
 if __name__ == '__main__':
