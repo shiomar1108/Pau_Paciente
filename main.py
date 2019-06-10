@@ -1,20 +1,18 @@
-import sys
 import glob
 from tkinter import *
 from PIL import ImageTk, Image
 sys.path.append("./00_src/")
-from Functions import create_report, new_patient
-file = "./01_Data/shiomar_salazar.xlsx"
+from Functions import create_report, new_patient, add_new_data
 
 def option1():
     master = Toplevel()
     master.title("Nuevo Paciente")
+    master.geometry('750x100')
     Label(master, text="Nombre del Paciente: ", font=("Calibri", 20)).grid(row=0)
-    e1 = Entry(master, font=("Calibri Bold", 20), width = 20)
+    e1 = Entry(master, font=("Calibri Bold", 20), width = 30)
     e1.grid(row=0, column=1)
 
     def btn_new_patient():
-        print("hola")
         new_patient(e1.get())
         master.destroy()
 
@@ -24,7 +22,7 @@ def option1():
 
 def option2():
     master = Toplevel()
-    master.title("Generar Reporte")
+    master.title("Paciente Existente ")
     master.geometry('400x400')
     panel = Label(master, text="Lista de Pacientes: ", font=("Calibri", 20))
     panel.pack(side="top", fill="both", expand="yes")
@@ -35,6 +33,12 @@ def option2():
         listbox.insert('end', text)
     listbox.pack(side="top", fill="both", expand="yes")
 
+    def btn_captura():
+        index = listbox.curselection()
+        temp = file_list[index[0]]
+        text = temp[10:-4]
+        add_new_data(text)
+
     def btn_gene_rep():
         index = listbox.curselection()
         temp = file_list[index[0]]
@@ -42,7 +46,7 @@ def option2():
         create_report(text)
         master.destroy()
 
-    panel0 = Button(master, text="Iniciar Captura ", font=("Calibri", 20), command=master.destroy)
+    panel0 = Button(master, text="Iniciar Captura ", font=("Calibri", 20), command=btn_captura)
     panel0.pack(side="top", fill="both", expand='yes')
     panel1 = Button(master, text="Generar Reporte", font=("Calibri", 20), command=btn_gene_rep)
     panel1.pack(side="top", fill="both", expand='yes')

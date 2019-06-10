@@ -4,9 +4,10 @@ import time
 from xlutils.copy import copy
 import pandas as pd
 from fpdf import FPDF
+from tkinter import *
 import matplotlib.pyplot as plt
 
-header = ["Fecha", "Edad", "Talla", "Peso", "IMC", "% De Grasa", "% De Masa Muscular", "% De Grasa Vicesal", "Edad Metabolica", "C. Pecho","C. Cintura", "C. Cadera", "C. Brazo Rep", "C. Brazo Cont", "C. Pierna", "% De Agua", "Glucosa", "PA", "Observaciones"]
+header = ["Fecha", "Edad", "Talla", "Peso", "IMC", "% De Grasa", "% De Masa Muscular", "% De Grasa Viceral", "Edad Metabolica", "C. Pecho","C. Cintura", "C. Cadera", "C. Brazo Rep", "C. Brazo Cont", "C. Pierna", "% De Agua", "Glucosa", "PA", "Observaciones"]
 header2 = ["Fecha", "Edad", "Talla", "Peso", "IMC", "% Grasa", "%  M M", "% De G V", "Edad M", "C. Pecho","C. Cintura", "C. Cadera", "C. Brazo R", "C. Brazo C", "C. Pierna", "% De Agua", "Glucosa", "PA", "Observaciones"]
 
 def new_patient (name):
@@ -75,14 +76,8 @@ def create_report(name):
     pdf.image('report.png', x=30, y=170, w=170, h=120, type='', link='https://www.facebook.com/pauwattynutri/')
     pdf.output(pdf_path, 'F')
 
-def add_new_data(file):
-    data = []
-    temp = time.strftime("%m/%d/%Y")
-    data.append(temp)
-    for i in range(1, 19):
-        text = "Diga " + header[i] + " :  "
-        data.append(input(text))
 
+def write_excel (data, file):
     rb = xlrd.open_workbook(file)
     r_sheet = rb.sheet_by_index(0)
     r = r_sheet.nrows
@@ -91,3 +86,97 @@ def add_new_data(file):
     for i in range(0, 19):
         sheet.write(r, i, data[i])
     wb.save(file)
+
+
+def add_new_data(name):
+    # create path
+    file = "./01_Data/" + name + ".xls"
+    data = []
+    temp = time.strftime("%m/%d/%Y")
+    data.append(temp)
+
+    window = Tk()
+    window.title("Captura de Datos")
+    window.geometry('600x600')
+
+    a = Label(window, text=header[1], font=("Calibri", 15)).grid(row=0, column=0)
+    b = Label(window, text=header[2], font=("Calibri", 15)).grid(row=1, column=0)
+    c = Label(window, text=header[3], font=("Calibri", 15)).grid(row=2, column=0)
+    e = Label(window, text=header[4], font=("Calibri", 15)).grid(row=3, column=0)
+    f = Label(window, text=header[5], font=("Calibri", 15)).grid(row=4, column=0)
+    g = Label(window, text=header[6], font=("Calibri", 15)).grid(row=5, column=0)
+    h = Label(window, text=header[7], font=("Calibri", 15)).grid(row=6, column=0)
+    i = Label(window, text=header[8], font=("Calibri", 15)).grid(row=7, column=0)
+    j = Label(window, text=header[9], font=("Calibri", 15)).grid(row=8, column=0)
+    k = Label(window, text=header[10], font=("Calibri", 15)).grid(row=9, column=0)
+    l = Label(window, text=header[11], font=("Calibri", 15)).grid(row=10, column=0)
+    m = Label(window, text=header[12], font=("Calibri", 15)).grid(row=11, column=0)
+    n = Label(window, text=header[13], font=("Calibri", 15)).grid(row=12, column=0)
+    o = Label(window, text=header[14], font=("Calibri", 15)).grid(row=13, column=0)
+    p = Label(window, text=header[15], font=("Calibri", 15)).grid(row=14, column=0)
+    q = Label(window, text=header[16], font=("Calibri", 15)).grid(row=15, column=0)
+    r = Label(window, text=header[17], font=("Calibri", 15)).grid(row=16, column=0)
+    s = Label(window, text=header[18], font=("Calibri", 15)).grid(row=17, column=0)
+
+    a1 = Entry(window, width=30, font=("Calibri", 15))
+    a1.grid(row=0, column=1)
+    b1 = Entry(window, width=30, font=("Calibri", 15))
+    b1.grid(row=1, column=1)
+    c1 = Entry(window, width=30, font=("Calibri", 15))
+    c1.grid(row=2, column=1)
+    d1 = Entry(window, width=30, font=("Calibri", 15))
+    d1.grid(row=3, column=1)
+    e1 = Entry(window, width=30, font=("Calibri", 15))
+    e1.grid(row=4, column=1)
+    f1 = Entry(window, width=30, font=("Calibri", 15))
+    f1.grid(row=5, column=1)
+    g1 = Entry(window, width=30, font=("Calibri", 15))
+    g1.grid(row=6, column=1)
+    h1 = Entry(window, width=30, font=("Calibri", 15))
+    h1.grid(row=7, column=1)
+    i1 = Entry(window, width=30, font=("Calibri", 15))
+    i1.grid(row=8, column=1)
+    j1 = Entry(window, width=30, font=("Calibri", 15))
+    j1.grid(row=9, column=1)
+    k1 = Entry(window, width=30, font=("Calibri", 15))
+    k1.grid(row=10, column=1)
+    l1 = Entry(window, width=30, font=("Calibri", 15))
+    l1.grid(row=11, column=1)
+    m1 = Entry(window, width=30, font=("Calibri", 15))
+    m1.grid(row=12, column=1)
+    n1 = Entry(window, width=30, font=("Calibri", 15))
+    n1.grid(row=13, column=1)
+    o1 = Entry(window, width=30, font=("Calibri", 15))
+    o1.grid(row=14, column=1)
+    p1 = Entry(window, width=30, font=("Calibri", 15))
+    p1.grid(row=15, column=1)
+    q1 = Entry(window, width=30, font=("Calibri", 15))
+    q1.grid(row=16, column=1)
+    r1 = Entry(window, width=30, font=("Calibri", 15))
+    r1.grid(row=17, column=1)
+
+    def btn_submit():
+        data.append(a1.get())
+        data.append(b1.get())
+        data.append(c1.get())
+        data.append(d1.get())
+        data.append(e1.get())
+        data.append(f1.get())
+        data.append(g1.get())
+        data.append(h1.get())
+        data.append(i1.get())
+        data.append(j1.get())
+        data.append(k1.get())
+        data.append(l1.get())
+        data.append(m1.get())
+        data.append(n1.get())
+        data.append(o1.get())
+        data.append(p1.get())
+        data.append(q1.get())
+        data.append(r1.get())
+        write_excel(data,file)
+        window.destroy()
+
+    Button(window, text='Guardar', font=("Calibri", 15), width=20, command=btn_submit).grid(row=18, column=1, pady=4)
+
+    window.mainloop()
